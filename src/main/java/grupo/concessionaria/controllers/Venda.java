@@ -12,41 +12,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import grupo.concessionaria.entities.Veiculo;
-import grupo.concessionaria.services.VeiculoService;
+import grupo.concessionaria.entities.Venda;
+import grupo.concessionaria.services.VendaService;
 
-@RequestMapping(value = "/Veiculo")
+@RequestMapping(value = "/Venda")
 @RestController
 
-public class VeiculoController {
+public class VendaController {
 	@Autowired
-	private VeiculoService service;
+	private VendaService service;
 
 	@GetMapping
-	public List<Veiculo> procurarTodos() {
+	public List<Venda> procurarTodos() {
 		return service.procurarTodos();
 	}
 
 	@GetMapping(value = "/{id}")
-	public Veiculo procurarPortodos(@PathVariable Integer id) {
+	public Venda procurarPortodos(@PathVariable Integer id) {
 		return service.procurarPorId(id);
 	}
 
 	@PostMapping
-	public String adicionarVeiculo(@RequestBody Veiculo veiculo) {
-		String response = service.adicionarVeiculo(veiculo);
+	public String adicionarVenda(@RequestBody Venda venda) {
+		String response = service.adicionarVenda(venda);
 		return response;
 	}
 
 	@PutMapping(value = "/{id}")
-	public String editarrVeiculo(@PathVariable Integer id, @RequestBody Veiculo veiculo) {
-		String response = service.editarVeiculo(id, veiculo);
+	public String editarrVenda(@PathVariable Integer id, @RequestBody Venda venda) {
+		String response = service.editarVenda(id, venda);
 		return response;
 	}
 
 	@DeleteMapping("/{id}")
-	public void excluirVeiculo(@PathVariable Integer id) {
-		service.excluirVeiculo(id);
+	public void excluirVenda(@PathVariable Integer id) {
+		service.excluirVenda(id);
 
 	}
 
