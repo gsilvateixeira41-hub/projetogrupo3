@@ -27,7 +27,7 @@ public String adicionarVeiculo(Veiculo veiculo) {
 
 public String editarVeiculo(Integer id,Veiculo veiculo){ 
 		Veiculo response= repository.findById (id).get();
-		response.setId(veiculo.getId());
+		
 		response.setModelo(veiculo.getModelo());
 		response.setPreco(veiculo.getPreco());
 		response.setCor(veiculo.getCor());

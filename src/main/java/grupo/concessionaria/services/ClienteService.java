@@ -28,7 +28,7 @@ public String adicionarCliente(Cliente cliente) {
 
 public String editarCliente(Integer id,Cliente cliente){ 
 		Cliente response= repository.findById (id).get();
-		response.setId(cliente.getId());
+	
 		response.setNome(cliente.getNome());
 		response.setCpf(cliente.getCpf());
 		response.setTelefone(cliente.getTelefone());

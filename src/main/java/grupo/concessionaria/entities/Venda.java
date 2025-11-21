@@ -32,7 +32,7 @@ public class Venda {
 	private BigDecimal valorFinal;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "cliente_id", nullable = false, unique = true)
+	@JoinColumn(name = "cliente_id", nullable = false)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 	private Cliente cliente;
 
@@ -42,7 +42,7 @@ public class Venda {
 	private Vendedor vendedor;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "veiculo_id", nullable = false, unique = true
+	@JoinColumn(name = "veiculo_id", nullable = false
 
 	)
 	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
@@ -52,11 +52,10 @@ public class Venda {
 
 	}
 
-	public Venda(Integer id, LocalDateTime dataVenda,
+	public Venda(LocalDateTime dataVenda,
 			@Digits(integer = 7, fraction = 2) @DecimalMin(value = "0.00", inclusive = true) BigDecimal valorFinal,
 			Cliente cliente, Vendedor vendedor, Veiculo veiculo) {
 
-		this.id = id;
 		this.dataVenda = dataVenda;
 		this.valorFinal = valorFinal;
 		this.cliente = cliente;

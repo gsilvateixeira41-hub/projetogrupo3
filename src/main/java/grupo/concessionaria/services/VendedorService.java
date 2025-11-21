@@ -28,7 +28,6 @@ public String adicionarVendedor(Vendedor vendedor) {
 
 public String editarVendedor(Integer id,Vendedor vendedor){ 
 		Vendedor response= repository.findById (id).get();
-		response.setId(vendedor.getId());
 		response.setNome(vendedor.getNome());
 		response.setCpf(vendedor.getCpf());
 		response.setMatricula(vendedor.getMatricula());

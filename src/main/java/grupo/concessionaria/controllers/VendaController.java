@@ -3,6 +3,8 @@ package grupo.concessionaria.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,15 +35,18 @@ public class VendaController {
 	}
 
 	@PostMapping
-	public String adicionarVenda(@RequestBody Venda venda) {
-		String response = service.adicionarVenda(venda);
-		return response;
+	public ResponseEntity<VendaService.VendaResponseDTO> registrar(
+			@RequestBody VendaService.RegistrarVendaRequestDTO dto) {
+		var resposta = service.registrarVenda(dto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(resposta);
 	}
 
-	@PutMapping(value = "/{id}")
-	public String editarrVenda(@PathVariable Integer id, @RequestBody Venda venda) {
-		String response = service.editarVenda(id, venda);
-		return response;
+	@PutMapping("/vendas/{id}")
+	public ResponseEntity<VendaService.VendaResponseDTO> editarVenda(@PathVariable Integer id,
+			@RequestBody VendaService.AtualizarVendaRequestDTO dto) {
+
+		VendaService.VendaResponseDTO response = service.editarVenda(id, dto);
+		return ResponseEntity.ok(response);
 	}
 
 	@DeleteMapping("/{id}")
