@@ -282,7 +282,8 @@ public class VendaService {
 	        dto.setModeloVeiculo(venda.getVeiculo().getModelo());
 	    }
 
-	    return dto;
+
+	    return dto;
 	
 	}
 }
