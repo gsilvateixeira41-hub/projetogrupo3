@@ -55,9 +55,6 @@ public class Veiculo {
 		this.marca = marca;
 	}
 
-	
-	
-
 	public BigDecimal getPreco() {
 		return preco;
 	}
@@ -82,10 +79,4 @@ public class Veiculo {
 		this.status = status;
 	}
 
-	 
-	}
-
-	
-	
-
-
+}

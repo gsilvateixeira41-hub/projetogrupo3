@@ -21,9 +21,10 @@ public Veiculo procurarPorId (Integer id) {
 	return repository.findById(id).get();
 }
 public String adicionarVeiculo(Veiculo veiculo) {
-		repository.save (veiculo);
-		return "Véiculo alugado com sucesso";
+	repository.save (veiculo);
+	return "Véiculo alugado com sucesso";
 }
+
 public String editarVeiculo(Integer id,Veiculo veiculo){ 
 		Veiculo response= repository.findById (id).get();
 		response.setId(veiculo.getId());
@@ -31,11 +32,12 @@ public String editarVeiculo(Integer id,Veiculo veiculo){
 		response.setPreco(veiculo.getPreco());
 		response.setCor(veiculo.getCor());
 		repository.save(response);
-		return" Veiculo alugado com sucesso!";		
+		return" Veiculo editado com sucesso!";		
 }
-public void excluirVeiculo(Integer id) {
+public String excluirVeiculo(Integer id) {
 	Veiculo response = repository.findById(id).get();
 	repository.delete(response);
+	return "veiculo excluido com sucesso!";
 	}
 
 }
