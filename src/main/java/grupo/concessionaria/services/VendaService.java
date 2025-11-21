@@ -29,10 +29,6 @@ public class VendaService {
 		this.veiculoService = veiculoService;
 	}
 
-	// =========================
-	// MÉTODOS PÚBLICOS
-	// =========================
-
 	public List<Venda> procurarTodos() {
 		return vendaRepository.findAll();
 	}
@@ -69,22 +65,12 @@ public class VendaService {
 		vendaRepository.delete(venda);
 	}
 
-	// =========================
-	// "USE CASE" INTERNO
-	// =========================
-
-	/**
-	 * Faz o papel do RegistrarVendaUseCase, mas dentro do service. - Busca Cliente,
-	 * Vendedor e Veículo pelos IDs - Verifica se o veículo está disponível (status
-	 * = true) - Cria a Venda - Atualiza status do veículo para false (vendido)
-	 */
 	private Venda registrarVendaUseCase(RegistrarVendaRequestDTO dto) {
 
 		Cliente cliente = clienteService.procurarPorId(dto.getClienteId());
 		Vendedor vendedor = vendedorService.procurarPorId(dto.getVendedorId());
 		Veiculo veiculo = veiculoService.procurarPorId(dto.getVeiculoId());
 
-		// true = disponível, false = vendido
 		if (!veiculo.getStatus()) {
 			throw new IllegalStateException("Veículo não está disponível para venda.");
 		}
@@ -93,16 +79,11 @@ public class VendaService {
 
 		Venda venda = new Venda(dataVenda, dto.getValorFinal(), cliente, vendedor, veiculo);
 
-		// marca veículo como vendido (indisponível)
 		veiculo.setStatus(false);
 		veiculoService.editarVeiculo(veiculo.getId(), veiculo);
 
 		return vendaRepository.save(venda);
 	}
-
-	// =========================
-	// DTOs INTERNOS
-	// =========================
 
 	public static class RegistrarVendaRequestDTO {
 
@@ -261,30 +242,28 @@ public class VendaService {
 	}
 
 	private VendaResponseDTO toResponseDTO(Venda venda) {
-	    VendaResponseDTO dto = new VendaResponseDTO();
+		VendaResponseDTO dto = new VendaResponseDTO();
 
-	    dto.setId(venda.getId());
-	    dto.setDataVenda(venda.getDataVenda());
-	    dto.setValorFinal(venda.getValorFinal());
+		dto.setId(venda.getId());
+		dto.setDataVenda(venda.getDataVenda());
+		dto.setValorFinal(venda.getValorFinal());
 
-	    if (venda.getCliente() != null) {
-	        dto.setClienteId(venda.getCliente().getId());
-	        dto.setNomeCliente(venda.getCliente().getNome());
-	    }
+		if (venda.getCliente() != null) {
+			dto.setClienteId(venda.getCliente().getId());
+			dto.setNomeCliente(venda.getCliente().getNome());
+		}
 
-	    if (venda.getVendedor() != null) {
-	        dto.setVendedorId(venda.getVendedor().getId());
-	        dto.setNomeVendedor(venda.getVendedor().getNome());
-	    }
+		if (venda.getVendedor() != null) {
+			dto.setVendedorId(venda.getVendedor().getId());
+			dto.setNomeVendedor(venda.getVendedor().getNome());
+		}
 
-	    if (venda.getVeiculo() != null) {
-	        dto.setVeiculoId(venda.getVeiculo().getId());
-	        dto.setModeloVeiculo(venda.getVeiculo().getModelo());
-	    }
+		if (venda.getVeiculo() != null) {
+			dto.setVeiculoId(venda.getVeiculo().getId());
+			dto.setModeloVeiculo(venda.getVeiculo().getModelo());
+		}
 
+		return dto;
 
-	    return dto;
-	
 	}
 }
-	
